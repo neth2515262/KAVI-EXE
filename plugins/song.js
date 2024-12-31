@@ -3,7 +3,8 @@ const {cmd , commands} = require('../command')
        const config = require('../config')
        const yts = require('yt-search')
        cmd({ 
-	pattern: "song2", 
+	pattern: "song2
+3", 
 	desc: "Download songs", 
 	category: "download", 
 	filename: __filename }, 
