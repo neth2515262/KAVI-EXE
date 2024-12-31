@@ -1,4 +1,8 @@
-cmd({ 
+const {cmd , commands} = require('../command')
+       const {runtime} = require('../lib/functions')
+       const config = require('../config')
+       const yts = require('yt-search')
+        cmd({ 
 	pattern: "song2", 
 	desc: "Download songs", 
 	category: "download", 
