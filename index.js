@@ -100,7 +100,7 @@ await conn.readMessages([mek.key])
   const text = `${config.AUTO_STATUS__MSG}`
   await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
 }
-if (config.ANTI_CALL === 'true') {
+if(config.ANTI_CALL === 'true') {
         for (const id of json) {
             try {
                 if (id.status === "offer") {
