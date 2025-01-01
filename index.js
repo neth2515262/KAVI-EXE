@@ -100,6 +100,36 @@ await conn.readMessages([mek.key])
   const text = `${config.AUTO_STATUS__MSG}`
   await conn.sendMessage(user, { text: text, react: { text: '💜', key: mek.key } }, { quoted: mek })
 }
+if (config.ANTI_CALL === 'true') {
+        for (const id of json) {
+            try {
+                if (id.status === "offer") {
+                    // Check if the caller is already in the recent callers list
+                    if (!recentCallers.has(id.id)) {
+                        // Add the caller to the recent callers list
+                        recentCallers.add(id.id);
+
+                        // Reject the call
+                        await conn.rejectCall(id.id, id.from);
+
+                        // Notify the caller if it's not a group call
+                        if (!id.isGroup) {
+                            await conn.sendMessage(id.from, {
+                                text: `*Call rejected automatically because the owner is busy ⚠*`,
+                                mentions: [id.from]
+                            });
+                        }
+
+                        // Remove the caller from the list after a delay (e.g., 1 minute)
+                        setTimeout(() => {
+                            recentCallers.delete(id.id);
+                        }, 60000); // 60 seconds
+                    }
+                }
+            } catch (error) {
+                console.error(`Failed to reject or notify for call: ${error.message}`);
+            }
+        }
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
