@@ -15,9 +15,10 @@
 ```
 1. auto status view ✅️
 2. fake recording ✅️
-3. anti calls ❌
+3. anti calls ✅
 4. auto status send ✅
 5. auto typing ✅
+6. status seen msg add ✅
 
 ✔️More features and improvements!
 
